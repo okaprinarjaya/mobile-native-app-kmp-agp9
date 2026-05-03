@@ -8,6 +8,8 @@ pluginManagement {
                 includeGroupAndSubgroups("androidx")
                 includeGroupAndSubgroups("com.android")
                 includeGroupAndSubgroups("com.google")
+                // Add this to allow KSP plugin resolution
+                includeGroupAndSubgroups("com.google.devtools.ksp")
             }
         }
         mavenCentral()
