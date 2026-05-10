@@ -15,14 +15,15 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -75,6 +76,18 @@ fun BookListScreen(
     val searchResultsListState = rememberLazyListState()
     val favoriteBooksListState = rememberLazyListState()
 
+    LaunchedEffect(state.searchResults) {
+        searchResultsListState.animateScrollToItem(0)
+    }
+
+    LaunchedEffect(state.selectedTabIndex) {
+        pagerState.animateScrollToPage(state.selectedTabIndex)
+    }
+
+    LaunchedEffect(pagerState.currentPage) {
+        onAction(BookListAction.OnTabSelected(pagerState.currentPage))
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -109,20 +122,21 @@ fun BookListScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TabRow(
+                SecondaryTabRow(
                     selectedTabIndex = state.selectedTabIndex,
                     modifier = Modifier
                         .padding(vertical = 12.dp)
                         .widthIn(max = 700.dp)
                         .fillMaxWidth(),
                     containerColor = DesertWhite,
-                    indicator = { tabPositions ->
+                    contentColor = TabRowDefaults.primaryContentColor,
+                    indicator = {
                         TabRowDefaults.SecondaryIndicator(
-                            color = SandYellow,
-                            modifier = Modifier
-                                .tabIndicatorOffset(tabPositions[state.selectedTabIndex])
+                            modifier = Modifier.tabIndicatorOffset(state.selectedTabIndex),
+                            color = SandYellow
                         )
-                    }
+                    },
+                    divider = { HorizontalDivider() }
                 ) {
                     Tab(
                         selected = state.selectedTabIndex == 0,
