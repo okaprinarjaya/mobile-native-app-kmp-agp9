@@ -43,5 +43,7 @@ dependencies {
     implementation(projects.composeApp)
     implementation(libs.compose.uiToolingPreview)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.ktor.client.okhttp)
+
     debugImplementation(libs.compose.uiTooling)
 }
