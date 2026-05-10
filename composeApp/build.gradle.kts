@@ -50,6 +50,7 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.material.icons.extended)
 
             // Serialization and Coroutines
             implementation(libs.kotlinx.serialization.json)
