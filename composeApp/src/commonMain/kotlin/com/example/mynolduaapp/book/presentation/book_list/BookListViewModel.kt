@@ -34,9 +34,7 @@ class BookListViewModel(
     private val _state = MutableStateFlow(BookListState())
     val state = _state
         .onStart {
-            println("masuk onStart")
             if (cachedBooks.isEmpty()) {
-                println("execute search query")
                 observeSearchQuery()
             }
             // observeFavoriteBooks()

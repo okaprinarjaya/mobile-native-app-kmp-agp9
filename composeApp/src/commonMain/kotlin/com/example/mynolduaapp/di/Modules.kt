@@ -4,6 +4,8 @@ import com.example.mynolduaapp.book.data.network.KtorRemoteBookDataSource
 import com.example.mynolduaapp.book.data.network.RemoteBookDataSource
 import com.example.mynolduaapp.book.data.repository.DefaultBookRepository
 import com.example.mynolduaapp.book.domain.BookRepository
+import com.example.mynolduaapp.book.presentation.SelectedBookViewModel
+import com.example.mynolduaapp.book.presentation.book_detail.BookDetailViewModel
 import com.example.mynolduaapp.book.presentation.book_list.BookListViewModel
 import com.example.mynolduaapp.core.data.HttpClientFactory
 import org.koin.core.module.Module
@@ -23,4 +25,6 @@ val sharedModule = module {
 
 
     viewModelOf(::BookListViewModel)
+    viewModelOf(::BookDetailViewModel)
+    viewModelOf(::SelectedBookViewModel)
 }
